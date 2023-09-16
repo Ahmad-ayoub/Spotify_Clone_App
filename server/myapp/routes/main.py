@@ -11,11 +11,12 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_cors import cross_origin
 from flask import send_from_directory
 
-app = Flask(__name__, static_folder='../server/myapp', static_url_path='https://leafy-bunny-e2898f.netlify.app')
+app = Flask(__name__, static_folder='../build', static_url_path='/')
 
-@app.route('/')
-@cross_origin()
-def serve():
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+@cross_origin(origins=["https://spotify-clone-app-fe.onrender.com"])
+def catch_all(path):
     return send_from_directory(app.static_folder, 'index.html')
 
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
