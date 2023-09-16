@@ -11,7 +11,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_cors import cross_origin
 from flask import send_from_directory
 
-app = Flask(__name__, static_folder='../build', static_url_path='/')
+app = Flask(__name__, static_folder='../../../build', static_url_path='')
 
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
