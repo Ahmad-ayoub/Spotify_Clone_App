@@ -20,7 +20,7 @@
     "react-scripts": "^3.4.4",
     "spotify-web-api-node": "^5.0.2",
     "web-vitals": "^2.1.4",
-    "webpack": "^5.88.2",
+    "webpack": "^4.42.0",
     "yarn": "^1.22.19"
   },
   "scripts": {
