@@ -4,38 +4,36 @@ import { Card } from "react-bootstrap";
 import playbtn from "../../Icons/play-button.png";
 
 function SearchBarResults({ searchResults, config, select_option }) {
-  console.log("searchResults:", searchResults);
-  console.log("Config", config);
-  console.log("Config link", config?.linkField);
-  console.log("select_option", select_option);
-  console.log(
-    "aritst_link",
-    searchResults?.[select_option?.["linkField"]][select_option?.["linkField"]]
-  );
+  const linkField = (select_option && select_option["linkField"]) || "";
+  const imageField = (select_option && select_option["imageField"]) || "";
+  const titleField = (select_option && select_option["titleField"]) || "";
+
+  const link =
+    (searchResults &&
+      searchResults[linkField] &&
+      searchResults[linkField][linkField]) ||
+    "#";
+  const image =
+    (searchResults && searchResults[imageField]) || "path/to/default/image.jpg";
+  const name = (searchResults && searchResults[titleField]) || "Default Title";
+
   const [singers, setSingers] = useState([
     {
       id: 1,
       isHovered: false,
-      image: searchResults?.[select_option?.["imageField"]],
-      name: searchResults?.[select_option?.["titleField"]],
-      link: searchResults?.[select_option?.["linkField"]][
-        select_option?.["linkField"]
-      ],
+      image: image,
+      name: name,
+      link: link,
       hoverImage: playbtn,
     },
   ]);
-  console.log("singsers", singers);
 
   if (searchResults || config) {
     return (
       <div className="card_layout">
         {singers.map((singer) => (
           <a
-            href={
-              searchResults?.[select_option?.["linkField"]][
-                select_option?.["linkField"]
-              ]
-            }
+            href={link}
             target="_blank"
             rel="noopener noreferrer"
             style={{ textDecoration: "none" }}
@@ -69,7 +67,7 @@ function SearchBarResults({ searchResults, config, select_option }) {
                 >
                   <Card.Img
                     variant="bottom"
-                    src={searchResults?.[select_option?.["imageField"]]}
+                    src={image}
                     className="card_img_genre"
                   />
                 </div>
@@ -95,7 +93,7 @@ function SearchBarResults({ searchResults, config, select_option }) {
                       }}
                     >
                       <p className="d-flex align-items-center mt-1, text-white">
-                        {searchResults?.[select_option?.["titleField"]]}
+                        {name}
                       </p>
                     </ul>
                   </li>
