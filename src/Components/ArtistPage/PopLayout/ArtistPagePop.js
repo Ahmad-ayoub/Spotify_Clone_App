@@ -114,7 +114,11 @@ function ArtistPagePop() {
       <div>
         <li>
           <a
-            href={artistDetails.artist_page?.artist_page}
+            href={
+              (artistDetails.artist_page &&
+                artistDetails.artist_page.artist_page) ??
+              " "
+            }
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -122,11 +126,17 @@ function ArtistPagePop() {
               <img
                 className="top_track_image_size"
                 style={{ marginRight: "2%", marginLeft: "2%" }}
-                src={artistDetails.top_track?.track_image}
+                src={
+                  (artistDetails.top_track &&
+                    artistDetails.top_track.track_image) ??
+                  ""
+                }
                 alt="top_track_img_Pop"
               />
               <p className="d-flex align-items-center mt-1, text-white">
-                {artistDetails.top_track?.track_name}
+                {(artistDetails.top_track &&
+                  artistDetails.top_track.track_name) ??
+                  ""}
               </p>
             </ul>
           </a>
