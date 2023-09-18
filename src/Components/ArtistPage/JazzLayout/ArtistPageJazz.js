@@ -40,14 +40,15 @@ function ArtistPageJazz() {
     },
   ]);
 
-  const [artistDetails, setArtistDetails] = useState(false);
+  const [artistDetails, setArtistDetails] = useState({});
   const [selectedArtist, setSelectedArtist] = useState(null);
+
   useEffect(() => {
     if (!selectedArtist) return;
     const getData = async () => {
       const response = await axios.get(`/artist?artist_name=${selectedArtist}`);
       setArtistDetails(response.data);
-      setSelectedArtist(false);
+      setSelectedArtist(null);
     };
 
     getData();
@@ -65,7 +66,7 @@ function ArtistPageJazz() {
       <div className="card_layout">
         {singers.map((singer) => (
           <Card
-            key={singer.id} // Don't forget to provide a unique 'key' for each element in a list
+            key={singer.id}
             style={{ width: "18rem" }}
             className="card_layout_bgcolor"
             onMouseEnter={() =>
@@ -113,7 +114,11 @@ function ArtistPageJazz() {
       <div>
         <li>
           <a
-            href={artistDetails.artist_page?.artist_page}
+            href={
+              (artistDetails.artist_page &&
+                artistDetails.artist_page.artist_page) ??
+              "#"
+            }
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -121,11 +126,17 @@ function ArtistPageJazz() {
               <img
                 className="top_track_image_size"
                 style={{ marginRight: "2%", marginLeft: "2%" }}
-                src={artistDetails.top_track?.track_image}
+                src={
+                  (artistDetails.top_track &&
+                    artistDetails.top_track.track_image) ??
+                  ""
+                }
                 alt="top_track_img_Jazz"
               />
               <p className="d-flex align-items-center mt-1, text-white">
-                {artistDetails.top_track?.track_name}
+                {(artistDetails.top_track &&
+                  artistDetails.top_track.track_name) ??
+                  ""}
               </p>
             </ul>
           </a>
