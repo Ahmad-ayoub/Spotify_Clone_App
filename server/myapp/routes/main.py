@@ -15,7 +15,7 @@ app = Flask(__name__, static_folder='../../../build', static_url_path='')
 
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
-@cross_origin(origins=["https://spotify-clone-app-fe.onrender.com"])
+# @cross_origin(origins=["https://spotify-clone-app-fe.onrender.com"])
 def catch_all(path):
     return send_from_directory(app.static_folder, 'index.html')
 
