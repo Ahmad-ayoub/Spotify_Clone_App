@@ -45,7 +45,9 @@ function ArtistPagePop() {
   useEffect(() => {
     if (!selectedArtist) return;
     const getData = async () => {
-      const response = await axios.get(`/artist?artist_name=${selectedArtist}`);
+      const response = await axios.get(
+        `https://simple-spotify.onrender.com/artist?artist_name=${selectedArtist}`
+      );
       setArtistDetails(response.data);
       setSelectedArtist(false);
     };

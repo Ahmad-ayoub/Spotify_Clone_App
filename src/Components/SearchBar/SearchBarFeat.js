@@ -15,7 +15,7 @@ function SearchBarFeat({ setSearchResults, setConfig }) {
 
   const handleSearchClick = async () => {
     const response = await axios.get(
-      `/${selectedOption.toLowerCase()}?${selectedOption}_name=${searchQuery}`
+      `https://simple-spotify.onrender.com/${selectedOption.toLowerCase()}?${selectedOption}_name=${searchQuery}`
     );
     setSearchResults(response.data);
     setConfig(selectedOption);

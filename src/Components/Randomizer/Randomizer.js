@@ -13,7 +13,7 @@ function Randomizer() {
     console.log("Component mounted");
     setLoading(true);
     axios
-      .get("/randomArtists")
+      .get("https://simple-spotify.onrender.com/randomArtists")
       .then((response) => {
         console.log("Component will unmount");
         const data = response.data.map((item, index) => {
