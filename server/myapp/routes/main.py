@@ -149,7 +149,7 @@ def get_top_track(auth_token, artist_id):
 
         track_name = first_track.get('name')
         track_image = first_track['album']['images'][0]['url'] if first_track['album']['images'] else None
-        track_link = first_track.get("external_urls").get("spotify")
+        track_link = first_track.get('external_urls', {}).get('spotify', '')
         
         
         return {
