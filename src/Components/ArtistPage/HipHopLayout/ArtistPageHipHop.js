@@ -115,11 +115,7 @@ function ArtistPageHipHop() {
       <div>
         <li>
           <a
-            href={
-              (artistDetails.artist_page &&
-                artistDetails.artist_page.artist_page) ??
-              "#"
-            }
+            href={artistDetails.song_page ?? "#"}
             target="_blank"
             rel="noopener noreferrer"
           >
