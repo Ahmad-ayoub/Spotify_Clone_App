@@ -115,7 +115,10 @@ function ArtistPageHipHop() {
       <div>
         <li>
           <a
-            href={artistDetails.track_link ?? "#"}
+            href={
+              (artistDetails.top_track && artistDetails.top_track.track_link) ??
+              ""
+            }
             target="_blank"
             rel="noopener noreferrer"
           >
