@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Card, Alert, Spinner } from "react-bootstrap";
 import playbtn from "../../Icons/play-button.png";
 import axios from "axios";
