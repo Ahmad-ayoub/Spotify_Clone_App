@@ -1,3 +1,4 @@
+import os
 from flask import Flask, request, jsonify
 import base64
 import requests
@@ -10,10 +11,15 @@ import psycopg2
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_cors import CORS, cross_origin
 from flask import send_from_directory
-import os
 
 app = Flask(__name__, static_folder='../../../build', static_url_path='')
 CORS(app)
+
+DATABASE_URL = os.environ.get("DATABASE_URL")  # If you want the whole URL
+DATABASE_USER = os.environ.get("DATABASE_USER")
+DATABASE_PASSWORD = os.environ.get("DATABASE_PASSWORD")
+DATABASE_HOST = os.environ.get("DATABASE_HOST")
+DATABASE_NAME = os.environ.get("DATABASE_NAME")
 
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
