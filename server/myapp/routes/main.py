@@ -10,6 +10,7 @@ import psycopg2
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_cors import CORS, cross_origin
 from flask import send_from_directory
+import os
 
 app = Flask(__name__, static_folder='../../../build', static_url_path='')
 CORS(app)
@@ -563,19 +564,25 @@ def login():
         return jsonify({"error": "Incorrect password!"}), 401
 
 
+# Environment Variables Setup (Assuming you've set these variables in your environment)
+DATABASE_URL = os.environ.get('DATABASE_URL')
+DB_USER = os.environ.get('DB_USER')
+DB_PASSWORD = os.environ.get('DB_PASSWORD')
+
+
 def connect_to_database():
     """Connects to the PostgreSQL database on Render.com.
 
     Returns:
-        A psycopg2 connection object.
+        A psycopg2 connection object or None if an error occurs.
     """
+    try:
+        connection = psycopg2.connect(DATABASE_URL, user=DB_USER, password=DB_PASSWORD)
+        return connection
+    except Exception as e:
+        print(f"Error connecting to the database: {e}")
+        return None
 
-    database_url = "postgres://sign_log_in_user:fKIqbZxP7XCA5lPxdF0DutZECNWUSxT9@dpg-ck616pldrqvc73flvh40-a/sign_log_in"
-    user = "sign_log_in_user"
-    password = "fKIqbZxP7XCA5lPxdF0DutZECNWUSxT9"
-
-    connection = psycopg2.connect(database_url, user=user, password=password)
-    return connection
 
 def close_connection(connection):
     """Closes a psycopg2 connection.
@@ -583,8 +590,43 @@ def close_connection(connection):
     Args:
         connection: A psycopg2 connection object.
     """
+    if connection:
+        connection.close()
 
-    connection.close()
+
+def insert_data(connection, table_name, data):
+    """Inserts data into a specified table."""
+    # NOTE: This is a very basic insert for demonstration. In a real-world scenario,
+    # you'd want to make this more dynamic and safer against SQL injection.
+    cursor = connection.cursor()
+    placeholders = ', '.join(['%s'] * len(data))
+    query = f"INSERT INTO {table_name} VALUES ({placeholders})"
+    cursor.execute(query, tuple(data.values()))
+    connection.commit()
+    cursor.close()
+
+
+def main():
+    conn = connect_to_database()
+    
+    if not conn:
+        print("Failed to establish a database connection.")
+        return
+    
+    # Dummy data and table name for insertion
+    data = {
+        "column1": "value1",
+        "column2": "value2",
+    }
+    table_name = "your_table_name"
+    
+    try:
+        insert_data(conn, table_name, data)
+        print("Data inserted successfully!")
+    except Exception as e:
+        print(f"Error inserting data: {e}")
+    finally:
+        close_connection(conn)
 
 
 if __name__ == "__main__":
