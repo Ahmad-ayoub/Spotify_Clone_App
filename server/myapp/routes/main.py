@@ -15,9 +15,9 @@ from flask import send_from_directory
 app = Flask(__name__, static_folder='../../../build', static_url_path='')
 CORS(app)
 
-DATABASE_URL = os.environ.get('DATABASE_URL')
-DB_USER = os.environ.get('DATABASE_USER')
-DB_PASSWORD = os.environ.get('DATABASE_PASSWORD')
+DATABASE_URL = os.environ.get('postgres://sign_log_in_user:fKIqbZxP7XCA5lPxdF0DutZECNWUSxT9@dpg-ck616pldrqvc73flvh40-a/sign_log_in')
+DB_USER = os.environ.get('sign_log_in_user')
+DB_PASSWORD = os.environ.get('fKIqbZxP7XCA5lPxdF0DutZECNWUSxT9')
 
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
