@@ -15,7 +15,7 @@ from flask import send_from_directory
 app = Flask(__name__, static_folder='../../../build', static_url_path='')
 CORS(app)
 
-DATABASE_URL = os.environ.get('postgres://sign_log_in_user:fKIqbZxP7XCA5lPxdF0DutZECNWUSxT9@dpg-ck616pldrqvc73flvh40-a/sign_log_in')
+DATABASE_URL = os.environ.get('postgresql://sign_log_in_user:fKIqbZxP7XCA5lPxdF0DutZECNWUSxT9@dpg-ck616pldrqvc73flvh40-a/sign_log_in')
 DB_USER = os.environ.get('sign_log_in_user')
 DB_PASSWORD = os.environ.get('fKIqbZxP7XCA5lPxdF0DutZECNWUSxT9')
 
@@ -24,7 +24,7 @@ DB_PASSWORD = os.environ.get('fKIqbZxP7XCA5lPxdF0DutZECNWUSxT9')
 @cross_origin(origins=["https://spotify-clone-app-fe.onrender.com"])
 def catch_all(path):
     return send_from_directory(app.static_folder, 'index.html')
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('postgres://sign_log_in_user:fKIqbZxP7XCA5lPxdF0DutZECNWUSxT9@dpg-ck616pldrqvc73flvh40-a/sign_log_in')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('postgresql://sign_log_in_user:fKIqbZxP7XCA5lPxdF0DutZECNWUSxT9@dpg-ck616pldrqvc73flvh40-a/sign_log_in')
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
