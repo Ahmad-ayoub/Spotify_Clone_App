@@ -11,6 +11,7 @@ import psycopg2
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_cors import CORS, cross_origin
 from flask import send_from_directory
+from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__, static_folder='../../../build', static_url_path='')
 CORS(app)
@@ -25,6 +26,7 @@ DB_PASSWORD = os.environ.get('DATABASE_PASSWORD')
 def catch_all(path):
     return send_from_directory(app.static_folder, 'index.html')
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
+db = SQLAlchemy(app)
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
