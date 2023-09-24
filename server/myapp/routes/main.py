@@ -24,6 +24,8 @@ DB_PASSWORD = os.environ.get('fKIqbZxP7XCA5lPxdF0DutZECNWUSxT9')
 @cross_origin(origins=["https://spotify-clone-app-fe.onrender.com"])
 def catch_all(path):
     return send_from_directory(app.static_folder, 'index.html')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('postgres://sign_log_in_user:fKIqbZxP7XCA5lPxdF0DutZECNWUSxT9@dpg-ck616pldrqvc73flvh40-a/sign_log_in')
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 
