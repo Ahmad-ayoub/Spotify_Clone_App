@@ -12,6 +12,8 @@ import psycopg2
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_cors import CORS, cross_origin
 from flask import send_from_directory
+from flask_migrate import Migrate
+
 
 app = Flask(__name__, static_folder="../../../build", static_url_path="")
 CORS(app)
@@ -19,6 +21,18 @@ CORS(app)
 DATABASE_URL = os.environ.get("DATABASE_URL")
 DB_USER = os.environ.get("DATABASE_USER")
 DB_PASSWORD = os.environ.get("DATABASE_PASSWORD")
+
+db = SQLAlchemy(app)
+migrate = Migrate(app, db)
+
+
+class NewTBL(db.Model):
+    __tablename__ = "newtbl"
+
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+    userName = db.Column(db.String(80), unique=True, nullable=False)
+    password = db.Column(db.String(120), nullable=False)
 
 
 @app.route("/", defaults={"path": ""})
@@ -29,7 +43,6 @@ def catch_all(path):
 
 
 app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL")
-db = SQLAlchemy(app)
 app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY")
 
 logging.basicConfig(
