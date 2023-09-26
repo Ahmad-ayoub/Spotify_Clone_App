@@ -37,10 +37,10 @@ logging.basicConfig(
 )
 
 DATABASE_CONFIG = {
-    "dbname": "NewDB",
-    "user": "postgres",
-    "password": "Akna()sol!@",
-    "host": "localhost",
+    "dbname": "sign_log_in",
+    "user": "sign_log_in_user",
+    "password": "fKIqbZxP7XCA5lPxdF0DutZECNWUSxT9",
+    "host": "dpg-ck616pldrqvc73flvh40-a",
     "port": "5432",
 }
 
