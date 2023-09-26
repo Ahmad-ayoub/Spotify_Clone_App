@@ -37,7 +37,7 @@ logging.basicConfig(
 )
 
 DATABASE_CONFIG = {
-    "dbname": "postgresql://sign_log_in_user:fKIqbZxP7XCA5lPxdF0DutZECNWUSxT9@dpg-ck616pldrqvc73flvh40-a/sign_log_in",
+    "dbname": "sign_log_in",
     "user": "sign_log_in_user",
     "password": "fKIqbZxP7XCA5lPxdF0DutZECNWUSxT9",
     "host": "dpg-ck616pldrqvc73flvh40-a",
