@@ -37,6 +37,11 @@ class NewTBL(db.Model):
     password = db.Column(db.String(120), nullable=False)
 
 
+@app.before_first_request
+def create_tables():
+    db.create_all()
+
+
 @app.route("/", defaults={"path": ""})
 @app.route("/<path:path>")
 @cross_origin(origins=["https://spotify-clone-app-fe.onrender.com"])
