@@ -14,16 +14,18 @@ from flask_cors import CORS, cross_origin
 from flask import send_from_directory
 from flask_migrate import Migrate
 
-
 app = Flask(__name__, static_folder="../../../build", static_url_path="")
 CORS(app)
+
+app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL")
+app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY")
+
+db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 
 DATABASE_URL = os.environ.get("DATABASE_URL")
 DB_USER = os.environ.get("DATABASE_USER")
 DB_PASSWORD = os.environ.get("DATABASE_PASSWORD")
-
-db = SQLAlchemy(app)
-migrate = Migrate(app, db)
 
 
 class NewTBL(db.Model):
@@ -41,9 +43,6 @@ class NewTBL(db.Model):
 def catch_all(path):
     return send_from_directory(app.static_folder, "index.html")
 
-
-app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL")
-app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY")
 
 logging.basicConfig(
     level=logging.DEBUG, format="%(asctime)s - %(levelname)s - %(message)s"
