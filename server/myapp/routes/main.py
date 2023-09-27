@@ -37,28 +37,9 @@ class NewTBL(db.Model):
     password = db.Column(db.String(120), nullable=False)
 
 
-def ensure_table_created():
-    conn = get_db_connection()
-    cur = conn.cursor()
-
-    try:
-        cur.execute(
-            """
-            CREATE TABLE IF NOT EXISTS public.newtbl (
-                id integer NOT NULL DEFAULT nextval('newtbl_id_seq'::regclass),
-                email character varying(120) COLLATE pg_catalog."default" NOT NULL,
-                userName character varying(80) COLLATE pg_catalog."default" NOT NULL,
-                password character varying(120) COLLATE pg_catalog."default" NOT NULL,
-                CONSTRAINT newtbl_pkey PRIMARY KEY (id),
-                CONSTRAINT newtbl_email_key UNIQUE (email),
-                CONSTRAINT newtbl_username_key UNIQUE (username)
-            )
-        """
-        )
-        conn.commit()
-    finally:
-        cur.close()
-        conn.close()
+@app.before_first_request
+def create_tables():
+    db.create_all()
 
 
 @app.route("/", defaults={"path": ""})
@@ -609,7 +590,6 @@ def connect_to_database():
 
 @app.route("/register", methods=["POST"])
 def register():
-    ensure_table_created()
     data = request.json
     hashed_password = generate_password_hash(data["password"], method="sha256")
 
@@ -632,7 +612,6 @@ def register():
 
 @app.route("/login", methods=["POST"])
 def login():
-    ensure_table_created()
     data = request.json
     user_name_or_email = data.get("userName") or data.get("email")
     print("user_name_or_email: ", user_name_or_email)
