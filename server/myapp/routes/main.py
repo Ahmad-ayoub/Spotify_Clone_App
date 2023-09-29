@@ -28,8 +28,8 @@ DB_USER = os.environ.get("DATABASE_USER")
 DB_PASSWORD = os.environ.get("DATABASE_PASSWORD")
 
 
-class NewTBL(db.Model):
-    __tablename__ = "NewTBL"
+class newtbl(db.Model):
+    __tablename__ = "newtbl"
 
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
@@ -598,7 +598,7 @@ def register():
 
     try:
         cur.execute(
-            "INSERT INTO NewTBL (email, user_name, password) VALUES (%s, %s, %s)",
+            "INSERT INTO newtbl (email, user_name, password) VALUES (%s, %s, %s)",
             (data["email"], data["user_name"], hashed_password),
         )
         conn.commit()
@@ -621,7 +621,7 @@ def login():
     cur = conn.cursor()
 
     cur.execute(
-        "SELECT id, email, user_name, password FROM NewTBL WHERE user_name=%s OR email=%s",
+        "SELECT id, email, user_name, password FROM newtbl WHERE user_name=%s OR email=%s",
         (user_name_or_email, user_name_or_email),
     )
     user = cur.fetchone()
