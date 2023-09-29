@@ -9,7 +9,7 @@ function LogSignIn() {
   const [showModal, setShowModal] = useState(false);
   const [isLogin, setIsLogin] = useState(true);
   const [creds, setCreds] = useState(true);
-  const [userName, setUserName] = useState("");
+  const [user_name, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState();
@@ -41,10 +41,10 @@ function LogSignIn() {
   function handleSubmit(event) {
     event.preventDefault();
     axios
-      .post("/login", { email, userName, password })
+      .post("/login", { email, user_name, password })
       .then((response) => {
         console.log(response.data.message);
-        setUserName(response.data.userName);
+        setUserName(response.data.user_name);
         setCreds(false);
         setMessage("You successfully logged in!");
       })
@@ -57,10 +57,10 @@ function LogSignIn() {
   const handleNewUser = (event) => {
     event.preventDefault();
     axios
-      .post("/register", { email, userName, password })
+      .post("/register", { email, user_name, password })
       .then((response) => {
         console.log(response.data.message);
-        setUserName(response.data.userName);
+        setUserName(response.data.user_name);
         setMessage("You successfully registered!");
       })
       .catch((error) => {
@@ -94,7 +94,7 @@ function LogSignIn() {
         <header className="login">
           <div className="loginBtns">
             <button className="btn btn-black rounded-pill my-button">
-              {userName} {/* Display the logged in username */}
+              {user_name} {/* Display the logged in username */}
             </button>
           </div>
         </header>

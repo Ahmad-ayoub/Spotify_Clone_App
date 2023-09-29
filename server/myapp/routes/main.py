@@ -33,7 +33,7 @@ class NewTBL(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
-    userName = db.Column(db.String(80), unique=True, nullable=False)
+    user_name = db.Column(db.String(80), unique=True, nullable=False)
     password = db.Column(db.String(120), nullable=False)
 
 
@@ -598,8 +598,8 @@ def register():
 
     try:
         cur.execute(
-            "INSERT INTO NewTBL (email, "userName", password) VALUES (%s, %s, %s)",
-            (data["email"], data["userName"], hashed_password),
+            "INSERT INTO NewTBL (email, user_name, password) VALUES (%s, %s, %s)",
+            (data["email"], data["user_name"], hashed_password),
         )
         conn.commit()
         return jsonify({"message": "User registered successfully!"}), 201
@@ -613,7 +613,7 @@ def register():
 @app.route("/login", methods=["POST"])
 def login():
     data = request.json
-    user_name_or_email = data.get("userName") or data.get("email")
+    user_name_or_email = data.get("user_name") or data.get("email")
     print("user_name_or_email: ", user_name_or_email)
     password = data.get("password")
 
@@ -621,7 +621,7 @@ def login():
     cur = conn.cursor()
 
     cur.execute(
-        "SELECT id, email, userName, password FROM NewTBL WHERE userName=%s OR email=%s",
+        "SELECT id, email, user_name, password FROM NewTBL WHERE user_name=%s OR email=%s",
         (user_name_or_email, user_name_or_email),
     )
     user = cur.fetchone()
@@ -632,11 +632,11 @@ def login():
     if not user:
         return jsonify({"error": "User not found!"}), 404
 
-    user_id, email, userName, stored_password = user
+    user_id, email, user_name, stored_password = user
     print("user: ", user)
 
     if check_password_hash(stored_password, password):
-        return jsonify({"id": user_id, "email": email, "userName": userName}), 200
+        return jsonify({"id": user_id, "email": email, "userName": user_name}), 200
     else:
         return jsonify({"error": "Incorrect password!"}), 401
 
