@@ -598,7 +598,7 @@ def register():
 
     try:
         cur.execute(
-            "INSERT INTO NewTBL (email, userName, password) VALUES (%s, %s, %s)",
+            "INSERT INTO NewTBL (email, "userName", password) VALUES (%s, %s, %s)",
             (data["email"], data["userName"], hashed_password),
         )
         conn.commit()
@@ -620,7 +620,6 @@ def login():
     conn = get_db_connection()
     cur = conn.cursor()
 
-    # Fetch the user with the given userName or email
     cur.execute(
         "SELECT id, email, userName, password FROM NewTBL WHERE userName=%s OR email=%s",
         (user_name_or_email, user_name_or_email),
@@ -636,7 +635,6 @@ def login():
     user_id, email, userName, stored_password = user
     print("user: ", user)
 
-    # Now you'll need to check the password. Here I'm assuming you're using werkzeug for hashing
     if check_password_hash(stored_password, password):
         return jsonify({"id": user_id, "email": email, "userName": userName}), 200
     else:
