@@ -29,7 +29,7 @@ DB_PASSWORD = os.environ.get("DATABASE_PASSWORD")
 
 
 class NewTBL(db.Model):
-    __tablename__ = "newtbl"
+    __tablename__ = "NewTBL"
 
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
