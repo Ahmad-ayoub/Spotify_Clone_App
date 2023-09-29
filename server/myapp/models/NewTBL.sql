@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS public.newtbl
 (
     id integer NOT NULL DEFAULT nextval('newtbl_id_seq'::regclass),
     email character varying(120) COLLATE pg_catalog."default" NOT NULL,
-    userName character varying(80) COLLATE pg_catalog."default" NOT NULL,
+    user_name character varying(80) COLLATE pg_catalog."default" NOT NULL,
     password character varying(120) COLLATE pg_catalog."default" NOT NULL,
     CONSTRAINT newtbl_pkey PRIMARY KEY (id),
     CONSTRAINT newtbl_email_key UNIQUE (email),
