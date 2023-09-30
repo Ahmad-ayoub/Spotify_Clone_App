@@ -598,7 +598,7 @@ def register():
 
     try:
         cur.execute(
-            "INSERT INTO newtbl (email, user_name, password) VALUES (%s, %s, %s)",
+            "INSERT INTO newtbl (email, username, password) VALUES (%s, %s, %s)",
             (data["email"], data["user_name"], hashed_password),
         )
         conn.commit()
