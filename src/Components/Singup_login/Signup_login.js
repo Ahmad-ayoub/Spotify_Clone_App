@@ -41,7 +41,7 @@ function LogSignIn() {
   function handleSubmit(event) {
     event.preventDefault();
     axios
-      .post("/login", { email, username: username, password })
+      .post("/login", { email, username, password })
       .then((response) => {
         console.log(response.data.message);
         setUserName(response.data.username);
@@ -57,7 +57,7 @@ function LogSignIn() {
   const handleNewUser = (event) => {
     event.preventDefault();
     axios
-      .post("/register", { email, username: username, password })
+      .post("/register", { email, username, password })
       .then((response) => {
         console.log(response.data.message);
         setUserName(response.data.username);
