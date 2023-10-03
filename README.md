@@ -3,7 +3,7 @@
 - **Introduction:**
   This project presents a simplified Spotify-like application, developed as a full-stack solution using React, Flask, and PostgreSQL. The app allows users to explore music genres, artists, songs, and albums. It leverages the Spotify API to fetch data and presents it through a user-friendly interface.
 
-  Here is the [link](https://master--leafy-bunny-e2898f.netlify.app)
+  Here is the [link](https://simple-spotify.onrender.com)
 
 - **Features:**
 
