@@ -636,7 +636,7 @@ def login():
     print("user: ", user)
 
     if check_password_hash(stored_password, password):
-        return jsonify({"id": user_id, "email": email, "userName": username}), 200
+        return jsonify({"id": user_id, "email": email, "username": username}), 200
     else:
         return jsonify({"error": "Incorrect password!"}), 401
 
