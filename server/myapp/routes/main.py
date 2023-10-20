@@ -17,7 +17,9 @@ from flask_migrate import Migrate
 app = Flask(__name__, static_folder="../../../build", static_url_path="")
 CORS(app)
 
-app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL")
+app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get(
+    "postgresql://postgres:Akna()sol!@@localhost:5432/userData"
+)
 app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY")
 
 db = SQLAlchemy(app)
