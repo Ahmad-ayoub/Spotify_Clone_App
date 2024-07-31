@@ -3,11 +3,8 @@ from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 import base64
 import requests
-from spotipy.oauth2 import SpotifyClientCredentials, SpotifyOAuth
-import pdb
 import random
 import logging
-import time
 import psycopg2
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_cors import CORS, cross_origin
