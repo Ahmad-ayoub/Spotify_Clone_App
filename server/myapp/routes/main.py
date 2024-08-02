@@ -43,7 +43,7 @@ def create_tables():
 @app.route("/<path:path>")
 @cross_origin(origins=["https://spotify-clone-app-fe.onrender.com"])
 def catch_all(path):
-    return send_from_directory(app.static_folder, "index.html")
+    return send_from_directory(app.j, "index.html")
 
 
 logging.basicConfig(
